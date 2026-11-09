@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Company - Job Application Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Job Application Tracker</h1>
+    <h2>Add New Company</h2>
+
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/companies">Companies</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/applications">Applications</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/job-match">Job Match</a>
+    </nav>
+
+    <hr>
+
+    <h3>Company Information</h3>
+    <p>Fill out the details below to add a company to your tracker.</p>
+
+    <form method="POST" action="/companies/add">
+
+        <label for="company_name">Company Name *</label>
+        <input type="text" id="company_name" name="company_name"
+               maxlength="100" required>
+
+        <label for="industry">Industry</label>
+        <input type="text" id="industry" name="industry" maxlength="50">
+
+        <label for="website">Website</label>
+        <input type="url" id="website" name="website"
+               maxlength="200" placeholder="https://example.com">
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" maxlength="50">
+
+        <label for="state">State</label>
+        <input type="text" id="state" name="state" maxlength="50">
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" rows="4"></textarea>
+
+        <button type="submit" class="btn-add">Save Company</button>
+        <a href="/companies">Cancel</a>
+
+    </form>
+
+</body>
+</html>

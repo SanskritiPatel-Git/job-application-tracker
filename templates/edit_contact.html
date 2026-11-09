@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Contact | Job Application Tracker</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Job Application Tracker 🌸</h1>
+
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/companies">Companies</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/applications">Applications</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/job-match">Job Match</a>
+    </nav>
+
+    <h2>Edit Contact ✏️</h2>
+    <p>Update your professional contact's information!</p>
+
+    <form method="POST">
+
+        <label for="company_id">Company *</label>
+        <select id="company_id" name="company_id" required>
+            {% for company in companies %}
+            <option value="{{ company.company_id }}"
+                {% if company.company_id == contact.company_id %}selected{% endif %}>
+                {{ company.company_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="first_name">First Name *</label>
+        <input type="text" id="first_name"
+               name="first_name" maxlength="100"
+               value="{{ contact.first_name }}" required>
+
+        <label for="last_name">Last Name *</label>
+        <input type="text" id="last_name"
+               name="last_name" maxlength="100"
+               value="{{ contact.last_name }}" required>
+
+        <label for="job_title">Job Title</label>
+        <input type="text" id="job_title"
+               name="job_title" maxlength="100"
+               value="{{ contact.job_title or '' }}">
+
+        <label for="email">Email</label>
+        <input type="email" id="email"
+               name="email" maxlength="255"
+               value="{{ contact.email or '' }}">
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone"
+               name="phone" maxlength="30"
+               value="{{ contact.phone or '' }}">
+
+        <label for="linkedin_url">LinkedIn Profile</label>
+        <input type="url" id="linkedin_url"
+               name="linkedin_url" maxlength="500"
+               value="{{ contact.linkedin_url or '' }}">
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes"
+                  rows="4">{{ contact.notes or '' }}</textarea>
+
+        <button type="submit">Save Changes</button>
+        <a href="/contacts" class="btn-add">Cancel</a>
+
+    </form>
+
+</body>
+</html>

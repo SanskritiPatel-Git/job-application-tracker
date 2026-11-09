@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Application | Job Application Tracker</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Job Application Tracker 🌸</h1>
+
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/companies">Companies</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/applications">Applications</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/job-match">Job Match</a>
+    </nav>
+
+    <h2>Add a New Application 📋</h2>
+    <p>Keep track of your job application journey!</p>
+
+    <form action="/applications/add" method="POST">
+
+        <label for="job_id">Job *</label>
+        <select id="job_id" name="job_id" required>
+            <option value="">Select a job</option>
+            {% for job in jobs %}
+            <option value="{{ job.job_id }}">
+                {{ job.job_title }} - {{ job.company_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="application_date">Application Date *</label>
+        <input type="date" id="application_date"
+               name="application_date" required>
+
+        <label for="status">Application Status</label>
+        <select id="status" name="status">
+            <option value="Applied">Applied</option>
+            <option value="Screening">Screening</option>
+            <option value="Interview">Interview</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Withdrawn">Withdrawn</option>
+        </select>
+
+        <label for="resume_version">Resume Version</label>
+        <input type="text" id="resume_version"
+               name="resume_version" maxlength="50"
+               placeholder="e.g. Cybersecurity Resume V2">
+
+        <label for="cover_letter_sent">Cover Letter Sent</label>
+        <input type="checkbox" id="cover_letter_sent"
+               name="cover_letter_sent" value="1">
+
+        <label for="response_date">Response Date</label>
+        <input type="date" id="response_date"
+               name="response_date">
+
+        <label for="interview_date">Interview Date and Time</label>
+        <input type="datetime-local" id="interview_date"
+               name="interview_date">
+
+<label for="interview_type">Interview Type</label>
+<select id="interview_type" name="interview_type">
+    <option value="">Select interview type</option>
+    <option value="Phone">Phone</option>
+    <option value="Video">Video</option>
+    <option value="In Person">In Person</option>
+    <option value="Technical">Technical</option>
+    <option value="Behavioral">Behavioral</option>
+</select>
+
+<label for="interviewer">Interviewer Name</label>
+<input type="text" id="interviewer"
+       name="interviewer" maxlength="100"
+       placeholder="e.g. Hiring Manager">
+
+<label for="interview_location">Interview Location</label>
+<input type="text" id="interview_location"
+       name="interview_location" maxlength="200"
+       placeholder="e.g. Zoom or Office">
+
+<label for="interview_feedback">Interview Feedback</label>
+<textarea id="interview_feedback"
+          name="interview_feedback" rows="3"
+          placeholder="How did the interview go?"></textarea>
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" rows="4"
+                  placeholder="Add any notes about your application..."></textarea>
+
+        <button type="submit">Save Application</button>
+        <a href="/applications" class="btn-add">Cancel</a>
+
+    </form>
+</body>
+</html>

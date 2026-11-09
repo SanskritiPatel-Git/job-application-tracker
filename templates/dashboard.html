@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Job Application Tracker</h1>
+    <h2>Dashboard</h2>
+
+<nav>
+    <a href="/">Dashboard</a>
+    <a href="/companies">Companies</a>
+    <a href="/jobs">Jobs</a>
+    <a href="/applications">Applications</a>
+    <a href="/contacts">Contacts</a>
+    <a href="/job-match">Job Match</a>
+</nav>
+
+    <hr>
+
+    <h3>My Application Overview</h3>
+
+
+<div class="dashboard-cards">
+
+    <div class="card card-pink">
+        <h3>Total Companies</h3>
+        <p>{{ companies }}</p>
+    </div>
+
+    <div class="card card-lavender">
+        <h3>Total Jobs</h3>
+        <p>{{ jobs }}</p>
+    </div>
+
+    <div class="card card-sage">
+        <h3>Total Applications</h3>
+        <p>{{ applications }}</p>
+    </div>
+
+    <div class="card card-cream">
+        <h3>Total Contacts</h3>
+        <p>{{ contacts }}</p>
+    </div>
+
+</div>
+
+</body>
+</html>

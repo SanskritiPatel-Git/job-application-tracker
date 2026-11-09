@@ -1,0 +1,285 @@
+
+/* general website styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff9fc;
+    color: #67465b;
+    margin: 0;
+    padding: 30px;
+}
+
+/* headings */
+h1 {
+    color: #814f6b;
+    margin-bottom: 8px;
+}
+
+h2 {
+    color: #67465b;
+}
+
+h3 {
+    color: #814f6b;
+}
+
+/* pastel navigation bar */
+nav {
+    background-color: #f7dce9;
+    padding: 18px;
+    border-radius: 14px;
+    margin: 20px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+nav a {
+    color: #67465b;
+    text-decoration: none;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #a34d78;
+    text-decoration: underline;
+}
+
+/* Dashboard card layout */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+/* individual dashboard cards */
+.card {
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(103, 70, 91, 0.08);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card p {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+/* different pastel colors */
+.card-pink {
+    background-color: #fce4ec;
+}
+
+.card-lavender {
+    background-color: #e8e0f7;
+}
+
+.card-sage {
+    background-color: #e0f2e9;
+}
+
+.card-cream {
+    background-color: #fff0d9;
+}
+
+/* mobile-friendly layout */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 6px;
+    }
+}
+
+/* companies table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 25px;
+    box-shadow: 0 4px 12px rgba(103, 70, 91, 0.08);
+}
+
+th {
+    background-color: #f7dce9;
+    color: #67465b;
+    padding: 18px;
+    text-align: left;
+    font-size: 14px;
+}
+
+td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f2e5ec;
+    font-size: 14px;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+tr:nth-child(even) {
+    background-color: #fff9fc;
+}
+
+tbody tr:hover {
+    background-color: #fceef5;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* pastel action buttons */
+.btn-add {
+    display: inline-block;
+    background-color: #e8e0f7;
+    color: #67465b;
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 12px;
+    transition: background-color 0.2s;
+}
+
+.btn-add:hover {
+    background-color: #d7c9f0;
+}
+
+/* add Company form */
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(103, 70, 91, 0.08);
+    max-width: 650px;
+    margin-top: 25px;
+}
+
+/* form labels */
+form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: #67465b;
+}
+
+/* form input fields */
+form input,
+form textarea,
+form select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e8d6e0;
+    border-radius: 10px;
+    background-color: #fff9fc;
+    color: #67465b;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* highlight selected fields */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #c99fbd;
+    box-shadow: 0 0 0 3px #f7dce9;
+}
+
+/* form buttons */
+form button {
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 22px;
+}
+
+form a {
+    color: #814f6b;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* edit button */
+.btn-edit {
+    display: inline-block;
+    background-color: #e8e0f7;
+    color: #67465b;
+    padding: 9px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.btn-edit:hover {
+    background-color: #d7c9f0;
+}
+
+/* Delete button */
+.btn-delete {
+    background-color: #fce4ec;
+    color: #a34d65;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #f5c9d9;
+}
+
+/* keep action buttons together */
+.delete-form {
+    display: inline-block;
+    background: transparent;
+    padding: 0;
+    margin: 0 0 0 8px;
+    max-width: none;
+    box-shadow: none;
+}
+
+.delete-form button {
+    margin-top: 0;
+}
+
+/* pastel form submit buttons */
+form button[type="submit"]:not(.btn-delete) {
+    background-color: #e8e0f7;
+    color: #67465b;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+form button[type="submit"]:not(.btn-delete):hover {
+    background-color: #d7c9f0;
+}

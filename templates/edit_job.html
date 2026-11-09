@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job | Job Application Tracker</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Job Application Tracker 🌸</h1>
+
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/companies">Companies</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/applications">Applications</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/job-match">Job Match</a>
+    </nav>
+
+    <h2>Edit Job 💼</h2>
+    <p>Update the details of your job opportunity!</p>
+
+    <form method="POST">
+
+        <label for="company_id">Company *</label>
+        <select id="company_id" name="company_id" required>
+            {% for company in companies %}
+            <option value="{{ company.company_id }}"
+                {% if company.company_id == job.company_id %}selected{% endif %}>
+                {{ company.company_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="job_title">Job Title *</label>
+        <input type="text" id="job_title" name="job_title"
+               value="{{ job.job_title }}" maxlength="100" required>
+
+        <label for="job_type">Job Type</label>
+        <select id="job_type" name="job_type">
+            <option value="">Select job type</option>
+            {% for type in ['Full-time', 'Part-time', 'Contract', 'Internship'] %}
+            <option value="{{ type }}"
+                {% if job.job_type == type %}selected{% endif %}>
+                {{ type }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="salary_min">Minimum Salary ($)</label>
+        <input type="number" id="salary_min" name="salary_min"
+               min="0" step="0.01"
+               value="{{ job.salary_min if job.salary_min is not none else '' }}">
+
+        <label for="salary_max">Maximum Salary ($)</label>
+        <input type="number" id="salary_max" name="salary_max"
+               min="0" step="0.01"
+               value="{{ job.salary_max if job.salary_max is not none else '' }}">
+
+        <label for="date_posted">Date Posted</label>
+        <input type="date" id="date_posted" name="date_posted"
+               value="{{ job.date_posted or '' }}">
+
+        <label for="posting_url">Job Posting URL</label>
+        <input type="url" id="posting_url" name="posting_url"
+               maxlength="500"
+               value="{{ job.posting_url or '' }}">
+
+        <label for="job_description">Job Description</label>
+        <textarea id="job_description" name="job_description"
+                  rows="5">{{ job.job_description or '' }}</textarea>
+
+        <button type="submit">Save Changes</button>
+        <a href="/jobs" class="btn-add">Cancel</a>
+
+    </form>
+</body>
+</html>

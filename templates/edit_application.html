@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Application | Job Application Tracker</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Job Application Tracker 🌸</h1>
+
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/companies">Companies</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/applications">Applications</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/job-match">Job Match</a>
+    </nav>
+
+    <h2>Edit Application 📋</h2>
+    <p>Update your application details and progress!</p>
+
+    <form method="POST">
+
+        <label for="job_id">Job *</label>
+        <select id="job_id" name="job_id" required>
+            {% for job in jobs %}
+            <option value="{{ job.job_id }}"
+                {% if job.job_id == application.job_id %}selected{% endif %}>
+                {{ job.job_title }} - {{ job.company_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="application_date">Application Date *</label>
+        <input type="date" id="application_date"
+               name="application_date"
+               value="{{ application.application_date }}"
+               required>
+
+        <label for="status">Application Status</label>
+        <select id="status" name="status">
+            {% for status in ['Applied', 'Screening', 'Interview', 'Offer', 'Rejected', 'Withdrawn'] %}
+            <option value="{{ status }}"
+                {% if application.status == status %}selected{% endif %}>
+                {{ status }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="resume_version">Resume Version</label>
+        <input type="text" id="resume_version"
+               name="resume_version" maxlength="50"
+               value="{{ application.resume_version or '' }}">
+
+        <label for="cover_letter_sent">Cover Letter Sent</label>
+        <input type="checkbox" id="cover_letter_sent"
+               name="cover_letter_sent" value="1"
+               {% if application.cover_letter_sent %}checked{% endif %}>
+
+        <label for="response_date">Response Date</label>
+        <input type="date" id="response_date"
+               name="response_date"
+               value="{{ application.response_date or '' }}">
+
+        <label for="interview_date">Interview Date and Time</label>
+        <input type="datetime-local" id="interview_date"
+               name="interview_date"
+               value="{{ application.interview_date.strftime('%Y-%m-%dT%H:%M') if application.interview_date else '' }}">
+
+<label for="interview_type">Interview Type</label>
+<select id="interview_type" name="interview_type">
+    <option value="">Select interview type</option>
+    {% for type in ['Phone', 'Video', 'In Person', 'Technical', 'Behavioral'] %}
+    <option value="{{ type }}"
+        {% if interview_details.get('interview_type') == type %}selected{% endif %}>
+        {{ type }}
+    </option>
+    {% endfor %}
+</select>
+
+<label for="interviewer">Interviewer Name</label>
+<input type="text" id="interviewer"
+       name="interviewer" maxlength="100"
+       value="{{ interview_details.get('interviewer', '') }}">
+
+<label for="interview_location">Interview Location</label>
+<input type="text" id="interview_location"
+       name="interview_location" maxlength="200"
+       value="{{ interview_details.get('location', '') }}">
+
+<label for="interview_feedback">Interview Feedback</label>
+<textarea id="interview_feedback"
+          name="interview_feedback"
+          rows="3">{{ interview_details.get('feedback', '') }}</textarea>
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes"
+                  rows="4">{{ application.notes or '' }}</textarea>
+
+        <button type="submit">Save Changes</button>
+        <a href="/applications" class="btn-add">Cancel</a>
+
+    </form>
+</body>
+</html>

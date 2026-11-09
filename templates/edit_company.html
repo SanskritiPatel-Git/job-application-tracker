@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Company - Job Application Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Job Application Tracker</h1>
+    <h2>Edit Company</h2>
+
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/companies">Companies</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/applications">Applications</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/job-match">Job Match</a>
+    </nav>
+
+    <hr>
+
+    <h3>Update Company Information</h3>
+    <p>Make changes to the company details below.</p>
+
+    <form method="POST">
+
+        <label for="company_name">Company Name *</label>
+        <input type="text" id="company_name" name="company_name"
+               value="{{ company.company_name }}" maxlength="100" required>
+
+        <label for="industry">Industry</label>
+        <input type="text" id="industry" name="industry"
+               value="{{ company.industry or '' }}" maxlength="50">
+
+        <label for="website">Website</label>
+        <input type="url" id="website" name="website"
+               value="{{ company.website or '' }}" maxlength="200">
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city"
+               value="{{ company.city or '' }}" maxlength="50">
+
+        <label for="state">State</label>
+        <input type="text" id="state" name="state"
+               value="{{ company.state or '' }}" maxlength="50">
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" rows="4">{{ company.notes or '' }}</textarea>
+
+        <button type="submit" class="btn-add">Save Changes</button>
+        <a href="/companies">Cancel</a>
+
+    </form>
+
+</body>
+</html>

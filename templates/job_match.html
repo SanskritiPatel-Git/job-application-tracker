@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Match | Job Application Tracker</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Job Application Tracker 🌸</h1>
+
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/companies">Companies</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/applications">Applications</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/job-match">Job Match</a>
+    </nav>
+
+    <h2>Find Your Job Match 💻</h2>
+    <p>Enter your skills to discover which jobs match you best!</p>
+
+    <form action="/job-match" method="POST">
+        <label for="skills">Your Skills</label>
+
+        <textarea
+            id="skills"
+            name="skills"
+            rows="4"
+            placeholder="Python, SQL, Git"
+            required>{{ skills_input or '' }}</textarea>
+
+        <p>Separate each skill with a comma.</p>
+
+        <button type="submit">Find My Matches 💗</button>
+    </form>
+
+    {% if matches is defined %}
+        <h2>Your Job Matches 🌸</h2>
+
+        {% if matches %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Match Percentage</th>
+                        <th>Matched Skills</th>
+                        <th>Missing Skills</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for match in matches %}
+                    <tr>
+                        <td>{{ match.job_title }}</td>
+                        <td>{{ match.company_name }}</td>
+                        <td>{{ match.match_percentage }}%</td>
+                        <td>
+                            {{ match.matched_skills | join(', ') or 'None' }}
+                        </td>
+                        <td>
+                            {{ match.missing_skills | join(', ') or 'None' }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No jobs with skill requirements were found.</p>
+        {% endif %}
+    {% endif %}
+
+</body>
+</html>
