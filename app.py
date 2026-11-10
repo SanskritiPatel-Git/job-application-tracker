@@ -243,6 +243,21 @@ def add_job():
         date_posted = request.form.get('date_posted', '').strip()
         posting_url = request.form.get('posting_url', '').strip()
         job_description = request.form.get('job_description', '').strip()
+        requirements_input = request.form.get('requirements', '').strip()
+
+        import json
+
+        requirements_list = [
+            skill.strip()
+            for skill in requirements_input.split(',')
+            if skill.strip()
+        ]
+
+        requirements_json = (
+            json.dumps(requirements_list)
+            if requirements_list
+            else None
+        )
 
         if not company_id.isdigit():
             return "Please select a valid company.", 400
@@ -290,9 +305,9 @@ def add_job():
                 INSERT INTO jobs (
                     company_id, job_title, job_type,
                     salary_min, salary_max, date_posted,
-                    posting_url, job_description
+                    posting_url, job_description, requirements
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (
                 int(company_id),
                 job_title,
@@ -301,7 +316,8 @@ def add_job():
                 maximum,
                 date_posted or None,
                 posting_url or None,
-                job_description or None
+                job_description or None,
+                requirements_json
             ))
             conn.commit()
         finally:
@@ -359,8 +375,24 @@ def edit_job(job_id):
             date_posted = request.form.get('date_posted', '').strip()
             posting_url = request.form.get('posting_url', '').strip()
             job_description = request.form.get('job_description', '').strip()
+            requirements_input = request.form.get('requirements', '').strip()
+        
+            import json
+
+            requirements_list = [
+                skill.strip()
+                for skill in requirements_input.split(',')
+                if skill.strip()
+            ]
+
+            requirements_json = (
+                json.dumps(requirements_list)
+                if requirements_list
+                else None
+            )
 
             if not company_id.isdigit() or not any(
+
                 c['company_id'] == int(company_id) for c in companies
             ):
                 return "Please select a valid company.", 400
@@ -408,8 +440,9 @@ def edit_job(job_id):
                     salary_max = %s,
                     date_posted = %s,
                     posting_url = %s,
-                    job_description = %s
-                WHERE job_id = %s
+                    job_description = %s,
+                    requirements = %s
+                    WHERE job_id = %s
             """, (
                 int(company_id),
                 job_title,
@@ -419,16 +452,33 @@ def edit_job(job_id):
                 date_posted or None,
                 posting_url or None,
                 job_description or None,
+                requirements_json,
                 job_id
             ))
 
             conn.commit()
             return redirect(url_for('jobs_page'))
+        
+        import json
+
+        existing_requirements = job.get('requirements')
+
+        if isinstance(existing_requirements, (str, bytes)):
+            existing_requirements = json.loads(existing_requirements)
+
+        if not isinstance(existing_requirements, list):
+            existing_requirements = []
+
+        requirements_text = ', '.join(
+            skill for skill in existing_requirements
+            if isinstance(skill, str)
+        )
 
         return render_template(
             'edit_job.html',
             job=job,
-            companies=companies
+            companies=companies,
+            requirements_text=requirements_text
         )
 
     finally:
