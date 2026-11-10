@@ -84,3 +84,18 @@ The `schema.sql` file contains the SQL needed to create the database tables.
 - Database passwords are not stored in the GitHub repository.
 - The `schema.sql` file creates the database structure but does not include sample records.
 - Job Match results require jobs with requirements stored in the database.
+
+## Sample Data
+
+The project includes a `seed.sql` file with fictional sample
+data for the companies, jobs, applications, and contacts tables.
+
+To load the sample data:
+
+1. Set up the MySQL database using `schema.sql`.
+2. Open `seed.sql` in MySQL Workbench.
+3. Execute the SQL script.
+4. Run the Flask application using `python app.py`.
+
+The sample data includes JSON fields for job requirements
+and interview information.
