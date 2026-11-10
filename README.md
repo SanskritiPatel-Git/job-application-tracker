@@ -99,3 +99,9 @@ To load the sample data:
 
 The sample data includes JSON fields for job requirements
 and interview information.
+
+## Demo Video
+
+A 6-minute and 56-second demonstration of the Job Application Tracker, including the website features, CRUD operations, Job Match functionality, Flask backend, and MySQL database.
+
+[Watch or download the project demonstration video](Job%20Application%20Tracker%20Video%20Compressed.mp4)
